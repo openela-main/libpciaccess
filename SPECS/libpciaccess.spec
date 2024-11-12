@@ -1,6 +1,6 @@
 Name:           libpciaccess
 Version:        0.16
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        PCI access library
 
 License:        MIT
@@ -13,6 +13,7 @@ Source0:	https://www.x.org/archive/individual/lib/%{name}-%{version}.tar.bz2
 Source1:        make-libpciaccess-snapshot.sh
 
 Patch2:		libpciaccess-rom-size.patch
+Patch3:		0001-vgaarb-Check-snprintf-return-value.patch
 
 BuildRequires:  autoconf automake libtool pkgconfig xorg-x11-util-macros
 BuildRequires: make
@@ -56,6 +57,10 @@ rm -f $RPM_BUILD_ROOT/%{_libdir}/*.la
 %{_libdir}/pkgconfig/pciaccess.pc
 
 %changelog
+* Wed Mar 20 2024 José Expósito <jexposit@redhat.com> - 0.16-7
+- Fix findings from static application security testing (SAST)
+  Resolves: https://issues.redhat.com/browse/RHEL-29753
+
 * Mon Aug 09 2021 Mohan Boddu <mboddu@redhat.com> - 0.16-6
 - Rebuilt for IMA sigs, glibc 2.34, aarch64 flags
   Related: rhbz#1991688
